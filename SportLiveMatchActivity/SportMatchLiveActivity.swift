@@ -53,7 +53,7 @@ struct SportMatchLiveActivity: Widget {
             static let horizontalSpacingTeamAndScore: CGFloat = 6.0
             static let verticalLiveInfoPadding: CGFloat = 8.0
             static let horizontalLiveInfoPadding: CGFloat = 4.0
-            static let horizontalMatchLiveInfoPadding: CGFloat = 4.0
+            static let horizontalMatchLiveInfoPadding: CGFloat = 3.0
 
         }
 

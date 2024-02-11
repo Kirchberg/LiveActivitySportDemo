@@ -16,7 +16,7 @@ struct TextTimer: View {
     init(_ dateRange: ClosedRange<Date>, font: UIFont, width: CGFloat? = nil) {
         self.dateRange = dateRange
         self.font = font
-        self.width = width ?? TextTimer.defaultWidth(for: font)
+        self.width = width ?? TextTimer.defaultWidth(font: font, dateRange: dateRange)
     }
 
     var body: some View {
@@ -27,10 +27,17 @@ struct TextTimer: View {
             .lineLimit(1)
     }
 
-    private static func defaultWidth(for font: UIFont) -> CGFloat {
-        let maxString = "00:00"
+    private static func defaultWidth(font: UIFont, dateRange: ClosedRange<Date>) -> CGFloat {
+        let maxString = maxStringFor(dateRange: dateRange)
         let fontAttributes = [NSAttributedString.Key.font: font]
         return (maxString as NSString).size(withAttributes: fontAttributes).width
+    }
+
+    private static func maxStringFor(dateRange: ClosedRange<Date>) -> String {
+        let duration = dateRange.upperBound.timeIntervalSince(dateRange.lowerBound)
+        let minutes = Int(duration) / 60
+        let seconds = Int(duration) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 
 }
