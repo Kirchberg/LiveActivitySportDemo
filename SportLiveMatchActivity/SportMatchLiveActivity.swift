@@ -1,5 +1,5 @@
 //
-//  SportLiveMatchActivityLiveActivity.swift
+//  SportMatchLiveActivity.swift
 //  SportLiveMatchActivity
 //
 //  Created by Kostarev Kirill on 03.02.2024.
@@ -9,7 +9,7 @@ import ActivityKit
 import WidgetKit
 import SwiftUI
 
-struct SportLiveMatchActivityLiveActivity: Widget {
+struct SportMatchLiveActivity: Widget {
 
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: SportEventMatchActivityAttributes.self) { context in
@@ -144,16 +144,26 @@ extension SportEventMatchActivityAttributes {
 extension SportEventMatchActivityAttributes.ContentState {
     fileprivate static var firstState: SportEventMatchActivityAttributes.ContentState {
         return SportEventMatchActivityAttributes.ContentState(
+            timeInfo: Date.now...Date(timeInterval: 120 * 60, since: .now),
+            firstTeamScore: "1",
+            secondTeamScore: "1",
+            matchInfo: "- 1nd half"
+        )
+    }
+
+    fileprivate static var secondState: SportEventMatchActivityAttributes.ContentState {
+        return SportEventMatchActivityAttributes.ContentState(
             timeInfo: Date.now...Date(timeInterval: 60 * 60, since: .now),
             firstTeamScore: "3",
-            secondTeamScore: "3",
+            secondTeamScore: "2",
             matchInfo: "- 2nd half"
         )
     }
 }
 
 #Preview("Notification", as: .content, using: SportEventMatchActivityAttributes.secondPreview) {
-   SportLiveMatchActivityLiveActivity()
+    SportMatchLiveActivity()
 } contentStates: {
     SportEventMatchActivityAttributes.ContentState.firstState
+    SportEventMatchActivityAttributes.ContentState.secondState
 }

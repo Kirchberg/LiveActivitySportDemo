@@ -13,8 +13,8 @@
 		42CE71F22B6E6E6800365639 /* StartActivityButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE71F12B6E6E6800365639 /* StartActivityButtonView.swift */; };
 		42CE71FA2B6E753300365639 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE71F92B6E753300365639 /* WidgetKit.framework */; };
 		42CE71FC2B6E753300365639 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE71FB2B6E753300365639 /* SwiftUI.framework */; };
-		42CE71FF2B6E753300365639 /* SportLiveMatchActivityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE71FE2B6E753300365639 /* SportLiveMatchActivityBundle.swift */; };
-		42CE72012B6E753300365639 /* SportLiveMatchActivityLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE72002B6E753300365639 /* SportLiveMatchActivityLiveActivity.swift */; };
+		42CE71FF2B6E753300365639 /* SportMatchActivityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE71FE2B6E753300365639 /* SportMatchActivityBundle.swift */; };
+		42CE72012B6E753300365639 /* SportMatchLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE72002B6E753300365639 /* SportMatchLiveActivity.swift */; };
 		42CE72032B6E753300365639 /* SportLiveMatchActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE72022B6E753300365639 /* SportLiveMatchActivity.swift */; };
 		42CE72052B6E753400365639 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CE72042B6E753400365639 /* Assets.xcassets */; };
 		42CE72092B6E753400365639 /* SportLiveMatchActivityExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 42CE71F72B6E753300365639 /* SportLiveMatchActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -55,8 +55,8 @@
 		42CE71F72B6E753300365639 /* SportLiveMatchActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SportLiveMatchActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CE71F92B6E753300365639 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		42CE71FB2B6E753300365639 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		42CE71FE2B6E753300365639 /* SportLiveMatchActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportLiveMatchActivityBundle.swift; sourceTree = "<group>"; };
-		42CE72002B6E753300365639 /* SportLiveMatchActivityLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportLiveMatchActivityLiveActivity.swift; sourceTree = "<group>"; };
+		42CE71FE2B6E753300365639 /* SportMatchActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportMatchActivityBundle.swift; sourceTree = "<group>"; };
+		42CE72002B6E753300365639 /* SportMatchLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportMatchLiveActivity.swift; sourceTree = "<group>"; };
 		42CE72022B6E753300365639 /* SportLiveMatchActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportLiveMatchActivity.swift; sourceTree = "<group>"; };
 		42CE72042B6E753400365639 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42CE72062B6E753400365639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -136,8 +136,8 @@
 			children = (
 				42DC0C2F2B775B9400C233F3 /* Helpers */,
 				42DC0C2C2B7756D600C233F3 /* Model */,
-				42CE71FE2B6E753300365639 /* SportLiveMatchActivityBundle.swift */,
-				42CE72002B6E753300365639 /* SportLiveMatchActivityLiveActivity.swift */,
+				42CE71FE2B6E753300365639 /* SportMatchActivityBundle.swift */,
+				42CE72002B6E753300365639 /* SportMatchLiveActivity.swift */,
 				42CE72022B6E753300365639 /* SportLiveMatchActivity.swift */,
 				42CE72042B6E753400365639 /* Assets.xcassets */,
 				42CE72062B6E753400365639 /* Info.plist */,
@@ -272,8 +272,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				42CE72032B6E753300365639 /* SportLiveMatchActivity.swift in Sources */,
-				42CE72012B6E753300365639 /* SportLiveMatchActivityLiveActivity.swift in Sources */,
-				42CE71FF2B6E753300365639 /* SportLiveMatchActivityBundle.swift in Sources */,
+				42CE72012B6E753300365639 /* SportMatchLiveActivity.swift in Sources */,
+				42CE71FF2B6E753300365639 /* SportMatchActivityBundle.swift in Sources */,
 				42DC0C332B79149800C233F3 /* TextTimer.swift in Sources */,
 				42DC0C2B2B7756D100C233F3 /* SportEventMatchActivityAttributes.swift in Sources */,
 			);
