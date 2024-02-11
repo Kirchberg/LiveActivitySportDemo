@@ -9,26 +9,11 @@ import ActivityKit
 import WidgetKit
 import SwiftUI
 
-struct SportLiveMatchActivityAttributes: ActivityAttributes {
-    public struct ContentState: Codable, Hashable {
-        // Dynamic stateful properties about your activity go here!
-        var emoji: String
-    }
-
-    // Fixed non-changing properties about your activity go here!
-    var name: String
-}
-
 struct SportLiveMatchActivityLiveActivity: Widget {
-    var body: some WidgetConfiguration {
-        ActivityConfiguration(for: SportLiveMatchActivityAttributes.self) { context in
-            // Lock screen/banner UI goes here
-            VStack {
-                Text("Hello \(context.state.emoji)")
-            }
-            .activityBackgroundTint(Color.cyan)
-            .activitySystemActionForegroundColor(Color.black)
 
+    var body: some WidgetConfiguration {
+        ActivityConfiguration(for: SportEventMatchActivityAttributes.self) { context in
+            sportEventMatchView(attributes: context.attributes, state: context.state)
         } dynamicIsland: { context in
             DynamicIsland {
                 // Expanded UI goes here.  Compose the expanded UI through
@@ -40,41 +25,135 @@ struct SportLiveMatchActivityLiveActivity: Widget {
                     Text("Trailing")
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom \(context.state.emoji)")
+                    Text("Bottom")
                     // more content
                 }
             } compactLeading: {
                 Text("L")
             } compactTrailing: {
-                Text("T \(context.state.emoji)")
+                Text("T")
             } minimal: {
-                Text(context.state.emoji)
+                Text("M")
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
         }
     }
+
+    // MARK: - Private Types
+
+    private enum Constants {
+
+        enum Layout {
+
+            static let dotLiveInfoSize: CGFloat = 4.0
+            static let imageSize: CGFloat = 28.0
+            static let horizontalInset: CGFloat = 52.0
+            static let verticalInset: CGFloat = 20.0
+            static let horizontalSpacingTeamAndScore: CGFloat = 6.0
+            static let verticalLiveInfoPadding: CGFloat = 8.0
+            static let horizontalLiveInfoPadding: CGFloat = 4.0
+            static let horizontalMatchLiveInfoPadding: CGFloat = 4.0
+
+        }
+
+    }
+
+    // MARK: - Private Properties
+
+    private func sportEventMatchView(attributes: SportEventMatchActivityAttributes, state: State) -> some View {
+        HStack(spacing: 0) {
+            sportEventTeamImageView(team: attributes.firstTeam)
+            Spacer()
+            sportEventMatchLiveInfoView(state: state)
+            Spacer()
+            sportEventTeamImageView(team: attributes.secondTeam)
+        }
+        .padding(.horizontal, Constants.Layout.horizontalInset)
+        .padding(.vertical, Constants.Layout.verticalInset)
+    }
+
+    private func sportEventTeamImageView(team: SportEventMatchTeam) -> some View {
+        VStack(spacing: Constants.Layout.horizontalSpacingTeamAndScore) {
+            Image(uiImage: UIImage(data: team.image) ?? UIImage())
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: Constants.Layout.imageSize, height: Constants.Layout.imageSize)
+            Text(team.title)
+                .font(.system(size: 16, weight: .medium))
+        }
+    }
+
+    private func sportEventMatchLiveInfoView(state: State) -> some View {
+        VStack(spacing: Constants.Layout.verticalLiveInfoPadding) {
+            sportEventTeamScoreView(state: state)
+            sportEventLiveScoreView(state: state)
+        }
+    }
+
+    private func sportEventTeamScoreView(state: State) -> some View {
+        Text("\(state.firstTeamScore) - \(state.secondTeamScore)")
+            .font(.system(size: 34, weight: .regular))
+    }
+
+    private func sportEventLiveScoreView(state: State) -> some View {
+        HStack(spacing: Constants.Layout.horizontalLiveInfoPadding) {
+            sportEventLiveScoreDotView
+            sportEventLiveScoreMatchInfoView(state: state)
+        }
+    }
+
+    private func sportEventLiveScoreMatchInfoView(state: State) -> some View {
+        HStack(spacing: Constants.Layout.horizontalMatchLiveInfoPadding) {
+            TextTimer(state.timeInfo, font: .systemFont(ofSize: 12, weight: .regular))
+
+            Text("\(state.matchInfo)")
+                .font(.system(size: 12, weight: .regular))
+                .foregroundStyle(.gray)
+        }
+    }
+
+    private var sportEventLiveScoreDotView: some View {
+        Circle()
+            .fill(.red)
+            .frame(width: Constants.Layout.dotLiveInfoSize, height: Constants.Layout.dotLiveInfoSize)
+    }
+
 }
 
-extension SportLiveMatchActivityAttributes {
-    fileprivate static var preview: SportLiveMatchActivityAttributes {
-        SportLiveMatchActivityAttributes(name: "World")
+extension SportEventMatchActivityAttributes {
+
+    fileprivate static var firstPreview: SportEventMatchActivityAttributes {
+        return SportEventMatchActivityAttributes(
+            firstTeam: .Examples.zenitTeam,
+            secondTeam: .Examples.spartakTeam,
+            matchTitle: "Example"
+        )
+    }
+
+    fileprivate static var secondPreview: SportEventMatchActivityAttributes {
+        return SportEventMatchActivityAttributes(
+            firstTeam: .Examples.romaTeam,
+            secondTeam: .Examples.empoliTeam,
+            matchTitle: "Example"
+        )
+    }
+
+}
+
+extension SportEventMatchActivityAttributes.ContentState {
+    fileprivate static var firstState: SportEventMatchActivityAttributes.ContentState {
+        return SportEventMatchActivityAttributes.ContentState(
+            timeInfo: Date.now...Date(timeInterval: 60 * 60, since: .now),
+            firstTeamScore: "3",
+            secondTeamScore: "3",
+            matchInfo: "- 2nd half"
+        )
     }
 }
 
-extension SportLiveMatchActivityAttributes.ContentState {
-    fileprivate static var smiley: SportLiveMatchActivityAttributes.ContentState {
-        SportLiveMatchActivityAttributes.ContentState(emoji: "😀")
-     }
-     
-     fileprivate static var starEyes: SportLiveMatchActivityAttributes.ContentState {
-         SportLiveMatchActivityAttributes.ContentState(emoji: "🤩")
-     }
-}
-
-#Preview("Notification", as: .content, using: SportLiveMatchActivityAttributes.preview) {
+#Preview("Notification", as: .content, using: SportEventMatchActivityAttributes.secondPreview) {
    SportLiveMatchActivityLiveActivity()
 } contentStates: {
-    SportLiveMatchActivityAttributes.ContentState.smiley
-    SportLiveMatchActivityAttributes.ContentState.starEyes
+    SportEventMatchActivityAttributes.ContentState.firstState
 }

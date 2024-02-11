@@ -11,7 +11,7 @@ import SwiftUI
 @main
 struct SportLiveMatchActivityBundle: WidgetBundle {
     var body: some Widget {
-        SportLiveMatchActivity()
+//        SportLiveMatchActivity()
         SportLiveMatchActivityLiveActivity()
     }
 }
